@@ -88,8 +88,8 @@ class Network(object):
     def SGD(self, training_data, epochs, mini_batch_size, eta,
             test_data=None):
         """随机梯度下降"""
-        if test_data: 
-            n_test = len(test_data)
+        if test_data:
+            print "{0}: {1} / {2}".format('梯度下降前', self.evaluate(test_data), len(test_data))
         n = len(training_data)
         for j in xrange(epochs):
             np.random.shuffle(training_data)
@@ -99,36 +99,36 @@ class Network(object):
             for mini_batch in mini_batches:
                 self._update_mini_batch(mini_batch, eta)
             if test_data:
-                print "Epoch {0}: {1} / {2}".format(j, self.evaluate(test_data), n_test)
+                print "Epoch {0}: {1} / {2}".format(j, self.evaluate(test_data), len(test_data))
             else:
                 print "Epoch {0} complete".format(j)
         
     def _backprop(self, x, y):
-		"""返回一个元组(nabla_b, nabla_w)代表目标函数的梯度."""
-		nabla_b = [np.zeros(b.shape) for b in self.biases]
-		nabla_w = [np.zeros(w.shape) for w in self.weights]
-		# feedforward
-		activation = x
-		activations = [x] # list to store all the activations, layer by layer
-		zs = [] # list to store all the z vectors, layer by layer
-		for b, w in zip(self.biases, self.weights):
-		    z = np.dot(w, activation)+b
-		    zs.append(z)
-		    activation = sigmoid(z)
-		    activations.append(activation)
-		# backward pass
-		delta = self._cost_derivative(activations[-1], y) * \
-		    sigmoid_prime(zs[-1])
-		nabla_b[-1] = delta
-		nabla_w[-1] = np.dot(delta, activations[-2].transpose())
-		"""l = 1 表示最后一层神经元，l = 2 是倒数第二层神经元, 依此类推."""
-		for l in xrange(2, self.num_layers):
-		    z = zs[-l]
-		    sp = sigmoid_prime(z)
-		    delta = np.dot(self.weights[-l+1].transpose(), delta) * sp
-		    nabla_b[-l] = delta
-		    nabla_w[-l] = np.dot(delta, activations[-l-1].transpose())
-		return (nabla_b, nabla_w)
+	"""返回一个元组(nabla_b, nabla_w)代表目标函数的梯度."""
+	nabla_b = [np.zeros(b.shape) for b in self.biases]
+	nabla_w = [np.zeros(w.shape) for w in self.weights]
+	# feedforward
+	activation = x
+	activations = [x] # list to store all the activations, layer by layer
+	zs = [] # list to store all the z vectors, layer by layer
+	for b, w in zip(self.biases, self.weights):
+	    z = np.dot(w, activation)+b
+	    zs.append(z)
+	    activation = sigmoid(z)
+	    activations.append(activation)
+	# backward pass
+	delta = self._cost_derivative(activations[-1], y) * \
+	    sigmoid_prime(zs[-1])
+	nabla_b[-1] = delta
+	nabla_w[-1] = np.dot(delta, activations[-2].transpose())
+	"""l = 1 表示最后一层神经元，l = 2 是倒数第二层神经元, 依此类推."""
+	for l in xrange(2, self.num_layers):
+	    z = zs[-l]
+	    sp = sigmoid_prime(z)
+	    delta = np.dot(self.weights[-l+1].transpose(), delta) * sp
+	    nabla_b[-l] = delta
+	    nabla_w[-l] = np.dot(delta, activations[-l-1].transpose())
+	return (nabla_b, nabla_w)
 
     def _update_mini_batch(self, mini_batch, eta):
         """使用后向传播算法进行参数更新.mini_batch是一个元组(x, y)的列表、eta是学习速率"""
@@ -188,7 +188,7 @@ def main():
     test_data = get_format_data(test_x,test_y,True)
     
     net = Network(sizes=[ndim,30,nclass])
-    net.SGD(training_data=training_data,epochs=5,mini_batch_size=10,eta=0.1,test_data=test_data)
+    net.SGD(training_data=training_data,epochs=10,mini_batch_size=10,eta=0.1,test_data=test_data)
 
 if __name__ == '__main__':
     main()
