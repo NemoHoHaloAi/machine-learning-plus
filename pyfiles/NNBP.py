@@ -60,8 +60,9 @@ def visual(neurons):
         return X_text,Y_text
 
     X_text,Y_text = gen_neuron_text(XX,YY)
+    texts = []
     for i in range(len(X_text)):
-        plt.text(X_text[i],Y_text[i],'neuron')
+        texts.append(plt.text(X_text[i],Y_text[i],'neuron'))
 
     def gen_weight_line(X,Y):
         """
@@ -90,6 +91,9 @@ def visual(neurons):
             for line in lines:
                 line.set_linewidth(np.random.randn())
                 tmp.append(line)
+        for text in texts:
+            text.set_text(str(np.random.randn()))
+            tmp.append(text)
         return tmp
     anim = animation.FuncAnimation(fig, animate, frames=200, interval=100, blit=True)
     plt.show()
