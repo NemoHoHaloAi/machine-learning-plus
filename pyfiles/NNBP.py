@@ -47,7 +47,21 @@ def visual(neurons):
                 YY.append(z)
         return X,Y,XX,YY
     X,Y,XX,YY = gen_neuron_pos(neurons)
-    ax.plot(XX, YY, 'b*')
+    ax.plot(XX, YY, 'ko')
+
+    def gen_neuron_text(XX,YY):
+        """
+        生成每个神经元对应的文本（数值显示）位置
+        """
+        X_text,Y_text = [],[]
+        for i in range(len(XX)):
+            X_text.append(XX[i]-abs(0.02*(2-0)))
+            Y_text.append(YY[i]+abs(0.02*(2-(-2))))
+        return X_text,Y_text
+
+    X_text,Y_text = gen_neuron_text(XX,YY)
+    for i in range(len(X_text)):
+        plt.text(X_text[i],Y_text[i],'neuron')
 
     def gen_weight_line(X,Y):
         """
@@ -66,16 +80,16 @@ def visual(neurons):
                     end_ys.append(end_y)
         return start_xs,start_ys,end_xs,end_ys
     sxs,sys,exs,eys = gen_weight_line(X,Y)
-    lines = []
+    liness = []
     for i in range(len(sxs)):
-        lines.append(ax.plot([sxs[i],exs[i]],[sys[i],eys[i]],'-',linewidth=1.))
+        liness.append(ax.plot([sxs[i],exs[i]],[sys[i],eys[i]],'-',linewidth=1.))
 
     def animate(i):
         tmp = []
-        for line in lines:
-            for l in line:
-                l.set_linewidth(np.random.randn())
-                tmp.append(l)
+        for lines in liness:
+            for line in lines:
+                line.set_linewidth(np.random.randn())
+                tmp.append(line)
         return tmp
     anim = animation.FuncAnimation(fig, animate, frames=200, interval=100, blit=True)
     plt.show()
@@ -86,7 +100,7 @@ def main():
     程序入口
     """
     enviroment_init()
-    visual([4,9,1])
+    visual([4,8,1])
 
 if __name__ == '__main__':
     main()
