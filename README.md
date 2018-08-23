@@ -2,15 +2,49 @@
 
 ## final learn plan
 * 时间：
-  2018-08-13~2018-09-25
+  2018-08-18~2018-09-25
 * 时长：
-  40D
+  35D
 * 内容：
-  ......
+  * P3 %76, P4, P5, P6, final P7
+  * 也就是说一个月时间完成4个半项目，因为之前的延迟，这个任务看起来很困难了已经，毕竟平均一个礼拜就要完成一个项目；
 * 划分：
-  1. ...
-  2. ...
-  3. ...
+  1. 8.18~8.19:两天先把P3剩余部分完成，之前就卡在这里，太多理论要去理解，现在的任务是先完成项目，完全理解后面再说；
+      1. 8.18:start P3 76%,end;
+      1. 8.19:start P3 76%,end;
+  2. 8.20~8.26:完成P4；
+      1. 8.20:start,end;
+      1. 8.21:start,end;
+      1. 8.22:start,end;
+      1. 8.23:start,end;
+      1. 8.24:start,end;
+      1. 8.25:start,end;
+      1. 8.26:start,end;
+  3. 8.27~9.2:完成P5；
+      1. 8.19:start,end;
+      1. 8.19:start,end;
+      1. 8.19:start,end;
+      1. 8.19:start,end;
+      1. 8.19:start,end;
+      1. 8.19:start,end;
+      1. 8.19:start,end;
+  4. 9.3~9.9:完成P6；
+      1. 8.19:start,end;
+      1. 8.19:start,end;
+      1. 8.19:start,end;
+      1. 8.19:start,end;
+      1. 8.19:start,end;
+      1. 8.19:start,end;
+      1. 8.19:start,end;
+  5. 9.10~9.16:完成P7；
+      1. 8.19:start,end;
+      1. 8.19:start,end;
+      1. 8.19:start,end;
+      1. 8.19:start,end;
+      1. 8.19:start,end;
+      1. 8.19:start,end;
+      1. 8.19:start,end;
+  6. 其余时间看情况分配；
 
 ## target
 
