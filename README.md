@@ -17,7 +17,7 @@
       1. 8.21:Nothing;
       1. 8.22:Nothing;
       1. 8.23:start 监督学习 95%,end 非监督学习 29%;
-      1. 8.24:start,end;
+      1. 8.24:start 非监督学习 29%,end 非监督学习 35%;
       1. 8.25:start,end;
       1. 8.26:start,end;
   3. 8.27~9.2:完成P5；
