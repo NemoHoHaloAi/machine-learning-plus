@@ -24,7 +24,7 @@
       1. 8.27:Nothing;
       1. 8.28:Nothing;
       1. 8.29:start 非监督学习 80%,end 强化学习 6%;
-      1. 8.30:start,end;
+      1. 8.30:start 强化学习 6%,end 强化学习 15%;
       1. 8.31:start,end;
       1. 9.01:start,end;
       1. 9.02:start,end;
