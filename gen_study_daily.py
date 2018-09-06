@@ -29,6 +29,7 @@ def main():
     """
     enviroment_init()
 
+    # 数据预处理
     lines=[]
     with open('README.md', 'r') as fr:
         start = False
@@ -44,11 +45,14 @@ def main():
             if start:
                 lines.append(line)
 
+    # 解析时间字段
     times = [line.split(',')[0].strip() for line in lines]
     times = [datetime.strptime(d, '%Y/%m/%d').date() for d in times]
     print times
-    # 监督学习-76,监督学习-95
+
+    # 解析进度数据
     dailies = []
+    dailies_acc = []
     offset = 0
     for line in lines:
         _from,_to = line.split(',')[1:]
@@ -58,18 +62,33 @@ def main():
             offset = offset + 100
         _from_v = float(_from_v)
         _to_v = float(_to_v)
-        dailies.append(_to_v + offset)
+        dailies.append(_to_v - _from_v if _to == _from else 100+_to_v-_from_v)
+        dailies_acc.append(_to_v + offset)
     print dailies
-    plt.plot(times,dailies)
+    print dailies_acc
 
+    # 绘制折线图，展示学习的积累情况，主要观察学习速率
+    plt.figure(12)
+    plt.subplot(121)
+    plt.plot(times,dailies_acc)
     ax = plt.gca()
     xfmt = mdates.DateFormatter('%y-%m-%d')
     ax.xaxis.set_major_formatter(xfmt)
-
     plt.ylabel(u'study_daily',fontproperties='SimHei')
     plt.xlabel(u'date',fontproperties='SimHei')
-
+    plt.ylim((0, 500))
     plt.grid(True)
+
+    # 绘制直方图，体现每日学习量
+    plt.subplot(122)
+    plt.bar(times,dailies)
+    ax = plt.gca()
+    xfmt = mdates.DateFormatter('%y-%m-%d')
+    ax.xaxis.set_major_formatter(xfmt)
+    plt.ylabel(u'study_daily',fontproperties='SimHei')
+    plt.xlabel(u'date',fontproperties='SimHei')
+    plt.grid(True)
+
     plt.show()
 
 if __name__ == '__main__':
