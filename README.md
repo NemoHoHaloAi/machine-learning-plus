@@ -27,15 +27,15 @@
       1. 8.30:start 强化学习 6%,end 强化学习 15%;
       1. 8.31:Nothing;
       1. 9.01:start 强化学习 15%,end 强化学习 21%;
-      1. 9.02:start 强化学习 21%,end 强化学习 %;
+      1. 9.02:start 强化学习 21%,end 强化学习 50%;
   4. 9.3~9.9:完成P5；
-      1. 8.19:start,end;
-      1. 8.19:start,end;
-      1. 8.19:start,end;
-      1. 8.19:start,end;
-      1. 8.19:start,end;
-      1. 8.19:start,end;
-      1. 8.19:start,end;
+      1. 9.03:Nothing;
+      1. 9.04:start 强化学习 50%,end 强化学习 100%;
+      1. 9.05:start 强化学习 100%,end 强化学习 100%;
+      1. 9.06:start,end;
+      1. 9.07:start,end;
+      1. 9.08:start,end;
+      1. 9.09:start,end;
   5. 9.10~9.16:完成P6；
       1. 8.19:start,end;
       1. 8.19:start,end;
