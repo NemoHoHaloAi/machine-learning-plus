@@ -24,7 +24,7 @@
     2018/9/5,强化学习-100,强化学习-100
     >>>>>>>>>>>END<<<<<<<<<<<<
 
-![学习进度](machine-learning-plus/study_daily.png)
+[!学习进度](machine-learning-plus/study_daily.png)
 
 ## final learn plan
 * 时间：
