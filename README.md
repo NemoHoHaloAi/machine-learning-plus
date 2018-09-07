@@ -22,6 +22,7 @@
     2018/9/3,强化学习-50,强化学习-50
     2018/9/4,强化学习-50,强化学习-100
     2018/9/5,强化学习-100,强化学习-100
+    2018/9/6,强化学习-100,深度学习-0
     >>>>>>>>>>>END<<<<<<<<<<<<](https://github.com/NemoHoHaloAi/machine-learning-plus/blob/master/study_daily.png)
 
 ## final learn plan
@@ -56,7 +57,7 @@
       1. 9.03:Nothing;
       1. 9.04:start 强化学习 50%,end 强化学习 100%;
       1. 9.05:start 强化学习 100%,end 强化学习 100%;
-      1. 9.06:start,end;
+      1. 9.06:start 强化学习 100%,end 深度学习 0%;
       1. 9.07:start,end;
       1. 9.08:start,end;
       1. 9.09:start,end;
