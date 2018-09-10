@@ -15,6 +15,21 @@ import os
 import input_data
 import tensorflow as tf
 
+"""
+第一版：
+    模型：1层的神经网络
+    权重、bias：全0初始化
+    激活函数：Softmax
+    损失函数：交叉熵
+    优化方式：梯度下降
+    准确率：训练1000次，下降步长0.01，测试集得分0.79
+
+可优化空间：
+    1. 增加层数提高抽象能力
+    2. 权重、bias的随机初始化避免0梯度等问题
+    3. 卷积、池化；
+"""
+
 def enviroment_init():
     """
     程序运行环境初始化
