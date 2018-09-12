@@ -91,5 +91,8 @@ def main():
 
     plt.show()
 
+    # 自动保存图片到当前目录下
+    plt.savefig('./study_daily.png')
+
 if __name__ == '__main__':
     main()
