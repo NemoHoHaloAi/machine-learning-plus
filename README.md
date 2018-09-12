@@ -26,6 +26,9 @@
     2018/9/7,深度学习-0,深度学习-0
     2018/9/8,深度学习-0,深度学习-52
     2018/9/9,深度学习-52,深度学习-80
+    2018/9/10,深度学习-80,深度学习-80
+    2018/9/11,深度学习-80,深度学习-80
+    2018/9/12,深度学习-80,深度学习-80
     >>>>>>>>>>>END<<<<<<<<<<<<](https://github.com/NemoHoHaloAi/machine-learning-plus/blob/master/study_daily.png)
 
 ## final learn plan
@@ -65,13 +68,13 @@
       1. 9.08:start 深度学习 0%,end 深度学习 52%;
       1. 9.09:start 深度学习 52%,end 深度学习 80%;
   5. 9.10~9.16:完成P6-final_project；
-      1. 8.19:start,end;
-      1. 8.19:start,end;
-      1. 8.19:start,end;
-      1. 8.19:start,end;
-      1. 8.19:start,end;
-      1. 8.19:start,end;
-      1. 8.19:start,end;
+      1. 9.10:start 深度学习 80%,end 深度学习 80%;
+      1. 9.11:start 深度学习 80%,end 深度学习 80%;
+      1. 9.12:start 深度学习 80%,end 深度学习 80%;
+      1. 9.13:start,end;
+      1. 9.14:start,end;
+      1. 9.15:start,end;
+      1. 9.16:start,end;
   6. 其余时间看情况分配；
 
 ## target
