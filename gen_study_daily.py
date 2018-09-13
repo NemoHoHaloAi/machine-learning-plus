@@ -90,10 +90,10 @@ def main():
     plt.grid(True)
 
     # 如果保存的话就不能show，否则会导致保存的是一片空白，应该可以解决吧，不过对我没影响，直接注释
-    # plt.show()
+    plt.show()
 
     # 自动保存图片到当前目录下
-    plt.savefig('./study_daily.png')
+    #plt.savefig('./study_daily.png')
 
 if __name__ == '__main__':
     main()
