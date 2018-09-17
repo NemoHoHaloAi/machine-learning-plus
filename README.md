@@ -30,6 +30,9 @@
     2018/9/11,深度学习-80,深度学习-80
     2018/9/12,深度学习-80,深度学习-80
     2018/9/13,深度学习-80,深度学习-80
+    2018/9/14,深度学习-80,深度学习-80
+    2018/9/15,深度学习-80,深度学习-80
+    2018/9/16,深度学习-80,深度学习-80
     >>>>>>>>>>>END<<<<<<<<<<<<](https://github.com/NemoHoHaloAi/machine-learning-plus/blob/master/study_daily.png)
 
 ## final learn plan
@@ -69,14 +72,37 @@
       1. 9.08:start 深度学习 0%,end 深度学习 52%;
       1. 9.09:start 深度学习 52%,end 深度学习 80%;
   5. 9.10~9.16:完成P6-final_project；
-      1. 9.10:start 深度学习 80%,end 深度学习 80%;
-      1. 9.11:start 深度学习 80%,end 深度学习 80%;
-      1. 9.12:start 深度学习 80%,end 深度学习 80%;
-      1. 9.13:start 深度学习 80%,end 深度学习 80%;
-      1. 9.14:start,end;
-      1. 9.15:start,end;
-      1. 9.16:start,end;
-  6. 其余时间看情况分配；
+      1. 9.10:Nothing;
+      1. 9.11:Nothing;
+      1. 9.12:Nothing;
+      1. 9.13:Nothing;
+      1. 9.14:Nothing;
+      1. 9.15:Nothing;
+      1. 9.16:Nothing;
+  6. 上个礼拜没有进展，又懈怠了啊，搬家也好怎么样也好，总之按原计划是延迟了两个星期，目前看尽快在接下来这个星期完成深度学习项目，然后开始最终项目；
+      1. 9.17:Nothing;
+      1. 9.18:Nothing;
+      1. 9.19:Nothing;
+      1. 9.20:Nothing;
+      1. 9.21:Nothing;
+      1. 9.22:Nothing;
+      1. 9.23:Nothing;
+  6. 最终项目；
+      1. 9.24:Nothing;
+      1. 9.25:Nothing;
+      1. 9.26:Nothing;
+      1. 9.27:Nothing;
+      1. 9.28:Nothing;
+      1. 9.29:Nothing;
+      1. 9.30:Nothing;
+  6. 暂定，本周课程结束，务必在本周前完成；
+      1. 10.01:Nothing;
+      1. 10.02:Nothing;
+      1. 10.03:Nothing;
+      1. 10.04:Nothing;
+      1. 10.05:Nothing;
+      1. 10.06:Nothing;
+      1. 10.07:Nothing;
 
 ## target
 
