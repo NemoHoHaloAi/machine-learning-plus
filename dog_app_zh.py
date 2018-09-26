@@ -218,6 +218,8 @@ print(sum(list(map(lambda dog_file:face_detector(dog_file),
 # __回答:__
 # 
 # 我认为要求合理，但是用户确实不容易达到这个要求，因为现实中受图像采集器械、光线、角度等要求很容易出现不符合要求的图像，解决这个问题的办法我认为可以通过采集更加大量的人脸图像数据，包括各种角度下的、各种光线下的，各种分辨率的图像，来加强我们模型的识别能力；
+# 
+# 方案：或许应该利用身体的其他部分来定位人脸，比如肩膀、手臂、背部的位置，因为 对于普通人来说，这些部分跟人脸都是有相对位置的关系的，通常来讲，确定了肩膀的位置， 一般脸部的位置也能基本确定，这时即便模糊的人脸不能提供太多信息，但是结合肩膀等其 他身体部分的位置信息，也能将人脸检测出来吧。
 
 # ---
 # 
@@ -436,7 +438,7 @@ test_tensors = paths_to_tensor(test_files).astype('float32')/255
 # __回答:__ 
 # 根据上图搭建的网络，相比较来看层数不错，训练速度较快，利用卷积层对数据的抽象特征也有一定的表达能力，因此可以达到1%的准确率；
 
-# In[34]:
+# In[13]:
 
 
 from keras.layers import Conv2D, MaxPooling2D, GlobalAveragePooling2D
@@ -446,19 +448,19 @@ from keras.models import Sequential
 model = Sequential()
 
 ### TODO: 定义你的网络架构
-model.add(Conv2D(filters=16, kernel_size=(2,2), strides=(1, 1), input_shape = train_tensors.shape[1:], data_format='channels_last'))
+model.add(Conv2D(filters=16, kernel_size=(2,2), strides=(1, 1), activation='relu', input_shape = train_tensors.shape[1:], data_format='channels_last'))
 model.add(MaxPooling2D(pool_size=2, strides=2))
-model.add(Conv2D(filters=32, kernel_size=(2,2), strides=(1, 1)))
+model.add(Conv2D(filters=32, kernel_size=(2,2), strides=(1, 1), activation='relu'))
 model.add(MaxPooling2D(pool_size=2, strides=2))
-model.add(Conv2D(filters=64, kernel_size=(2,2), strides=(1, 1)))
+model.add(Conv2D(filters=64, kernel_size=(2,2), strides=(1, 1), activation='relu'))
 model.add(MaxPooling2D(pool_size=2, strides=2))
 model.add(GlobalAveragePooling2D())
-model.add(Dense(units=133))
+model.add(Dense(units=133, activation='softmax'))
 
 model.summary()
 
 
-# In[35]:
+# In[14]:
 
 
 ## 编译模型
@@ -482,7 +484,7 @@ model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['ac
 # 
 # 
 
-# In[36]:
+# In[15]:
 
 
 from keras.callbacks import ModelCheckpoint  
@@ -501,7 +503,7 @@ model.fit(train_tensors, train_targets,
           epochs=epochs, batch_size=20, callbacks=[checkpointer], verbose=1)
 
 
-# In[37]:
+# In[16]:
 
 
 ## 加载具有最好验证loss的模型
@@ -513,7 +515,7 @@ model.load_weights('saved_models/weights.best.from_scratch.hdf5')
 # 
 # 在狗图像的测试数据集上试用你的模型。确保测试准确率大于1%。
 
-# In[38]:
+# In[17]:
 
 
 # 获取测试数据集中每一个图像所预测的狗品种的index
@@ -534,7 +536,7 @@ print('Test accuracy: %.4f%%' % test_accuracy)
 
 # ### 得到从图像中提取的特征向量（Bottleneck Features）
 
-# In[39]:
+# In[18]:
 
 
 bottleneck_features = np.load('/data/bottleneck_features/DogVGG16Data.npz')
@@ -547,7 +549,7 @@ test_VGG16 = bottleneck_features['test']
 # 
 # 该模型使用预训练的 VGG-16 模型作为固定的图像特征提取器，其中 VGG-16 最后一层卷积层的输出被直接输入到我们的模型。我们只需要添加一个全局平均池化层以及一个全连接层，其中全连接层使用 softmax 激活函数，对每一个狗的种类都包含一个节点。
 
-# In[40]:
+# In[19]:
 
 
 VGG16_model = Sequential()
@@ -557,7 +559,7 @@ VGG16_model.add(Dense(133, activation='softmax'))
 VGG16_model.summary()
 
 
-# In[41]:
+# In[20]:
 
 
 ## 编译模型
@@ -565,7 +567,7 @@ VGG16_model.summary()
 VGG16_model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
 
 
-# In[42]:
+# In[21]:
 
 
 ## 训练模型
@@ -579,7 +581,7 @@ VGG16_model.fit(train_VGG16, train_targets,
 
 
 
-# In[43]:
+# In[22]:
 
 
 ## 加载具有最好验证loss的模型
@@ -590,7 +592,7 @@ VGG16_model.load_weights('saved_models/weights.best.VGG16.hdf5')
 # ### 测试模型
 # 现在，我们可以测试此CNN在狗图像测试数据集中识别品种的效果如何。我们在下方打印出测试准确率。
 
-# In[44]:
+# In[23]:
 
 
 # 获取测试数据集中每一个图像所预测的狗品种的index
@@ -603,7 +605,7 @@ print('Test accuracy: %.4f%%' % test_accuracy)
 
 # ### 使用模型预测狗的品种
 
-# In[45]:
+# In[24]:
 
 
 from extract_bottleneck_features import *
@@ -646,7 +648,7 @@ def VGG16_predict_breed(img_path):
 #     valid_{network} = bottleneck_features['valid']
 #     test_{network} = bottleneck_features['test']
 
-# In[46]:
+# In[25]:
 
 
 ### TODO: 从另一个预训练的CNN获取bottleneck特征
@@ -674,9 +676,9 @@ test_ResNet50 = bottleneck_features['test']
 # 
 # __回答:__ 
 # 
-# 
+# 使用keras搭建基于ResNet-50的网络结构，因为是基于ResNet-50的结构，因此只需要定义输出层即可，使用一个GlobalAveragePooling2D做全局平均值池化，之后使用一个Dense做输出层，Softmax做输出层的激活函数，首先使用ResNet-50的原因是它相对于VGG等架构，网络更深，抽象表达能力更强，对于图片数据的理解更强，数据也证明了在测试集上的表现更好，同时由于它的残差单元，避免了深度网络可能出现的退化问题；
 
-# In[47]:
+# In[26]:
 
 
 ### TODO: 定义你的框架
@@ -720,7 +722,7 @@ Resnet50_model.add(Dense(133, activation='softmax'))
 Resnet50_model.summary()
 
 
-# In[48]:
+# In[27]:
 
 
 ### TODO: 编译模型
@@ -740,7 +742,7 @@ Resnet50_model.compile(optimizer='rmsprop', loss='categorical_crossentropy', met
 # 当然，你也可以对训练集进行 [数据增强](https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html) 以优化模型的表现，不过这不是必须的步骤。
 # 
 
-# In[49]:
+# In[28]:
 
 
 from keras.callbacks import ModelCheckpoint  
@@ -752,7 +754,7 @@ Resnet50_model.fit(train_ResNet50, train_targets,
           epochs=20, batch_size=20, callbacks=[checkpointer], verbose=1)
 
 
-# In[50]:
+# In[29]:
 
 
 ### TODO: 加载具有最佳验证loss的模型权重
@@ -769,7 +771,7 @@ Resnet50_model.load_weights('saved_models/weights.best.VGG19.hdf5')
 # 
 # 在狗图像的测试数据集上试用你的模型。确保测试准确率大于60%。
 
-# In[52]:
+# In[30]:
 
 
 ### TODO: 在测试集上计算分类准确率
@@ -804,7 +806,7 @@ print('Test accuracy: %.4f%%' % test_accuracy)
 # 
 # ### __问题 9:__
 
-# In[59]:
+# In[31]:
 
 
 ### TODO: 写一个函数，该函数将图像的路径作为输入
@@ -851,7 +853,7 @@ def Resnet50_predict_breed(img_path):
 # ---
 # 
 
-# In[60]:
+# In[32]:
 
 
 ### TODO: 设计你的算法
@@ -865,7 +867,7 @@ dog_file_tiny = test_files[:10]
 
 # 展示一个人的图片
 
-# In[61]:
+# In[33]:
 
 
 plt.imshow(image.load_img(human_file_tiny[0], target_size=(224, 224)))
@@ -874,7 +876,7 @@ plt.show()
 
 # 展示一个狗狗的图片
 
-# In[56]:
+# In[34]:
 
 
 plt.imshow(image.load_img(dog_file_tiny[0], target_size=(224, 224)))
@@ -883,27 +885,30 @@ plt.show()
 
 # 定义函数，接受img_path输入，返回是狗狗还是人类，如果是狗狗，是哪种类别，如果是人类，跟哪种类别最接近呢
 
-# In[62]:
+# In[35]:
 
 
 def check_yourself(img_path):
-    is_dog = True
+    is_dog = False
+    is_human = False
     if face_detector(img_path):
-        is_dog = False
+        is_human = True
     if dog_detector(img_path):
         is_dog = True
     dog_like = Resnet50_predict_breed(img_path)
     if is_dog:
         print('You are dog, right?And your variety,I guess '+str(dog_like))
-    else:
+    elif is_human:
         print('You are human, right?But you look like '+str(dog_like))
+    else:
+        print('Alert!!!Not dog or human!!!')
     plt.imshow(image.load_img(img_path, target_size=(224, 224)))
     plt.show()
 
 
 # 测试一下函数：
 
-# In[63]:
+# In[36]:
 
 
 check_yourself(dog_file_tiny[-1])
@@ -911,7 +916,7 @@ check_yourself(dog_file_tiny[-1])
 
 # 嗯嗯，松狮，应该是对的吧，不过看着好像有点像小藏獒啊。。。。
 
-# In[64]:
+# In[37]:
 
 
 check_yourself(human_file_tiny[-1])
@@ -919,7 +924,7 @@ check_yourself(human_file_tiny[-1])
 
 # 额，你别说，表情感觉确实有点像猎狐犬；
 
-# In[65]:
+# In[38]:
 
 
 check_yourself(human_file_tiny[1])
@@ -927,7 +932,7 @@ check_yourself(human_file_tiny[1])
 
 # 丝毛梗？？？是因为发型么。。。
 
-# In[66]:
+# In[39]:
 
 
 check_yourself(dog_file_tiny[1])
@@ -952,21 +957,25 @@ check_yourself(dog_file_tiny[1])
 # 1. 输出结果比你预想的要好吗 :) ？或者更糟 :( ？
 # 2. 提出至少三点改进你的模型的想法。
 
-# In[67]:
+# In[40]:
 
 
 ## TODO: 在你的电脑上，在步骤6中，至少在6张图片上运行你的算法。
 ## 自由地使用所需的代码单元数吧
 import random
-for i in range(3):
-    check_yourself(random.choice(human_files))
-for i in range(3):
-    check_yourself(random.choice(train_files))
+myself_images = ['/home/workspace/dog-project/images/myself/human1.jpg', 
+                 '/home/workspace/dog-project/images/myself/heibei.jpg',
+                 '/home/workspace/dog-project/images/myself/limao.jpg', 
+                 '/home/workspace/dog-project/images/myself/keji.jpg',
+                 '/home/workspace/dog-project/images/myself/jvmao.jpg', 
+                 '/home/workspace/dog-project/images/myself/human2.jpg']
+for image_path in myself_images:
+    check_yourself(image_path)
 
 
-# 使用Workspace使用自己的图片。。。这是要上传上去么。。。
+# 额，普朗克大师竟然没被认出来，差评！！！估计一个是角度问题，一个是分辨率问题，毕竟是侧脸加上这N年前的长相估计训练的数据里没有吧。。。
 
-# 1. 结果比预期要好，毕竟这些狗狗图片各种角度、背景、光线，以及狗狗的动作也非常丰富，在这种情况下能够达到目前随机三张狗狗都是对的，还是很好的。。。
+# 1. 结果比预期要好，毕竟这些狗狗图片各种角度、背景、光线，以及狗狗的动作也非常丰富，在这种情况下除了最后一张黑白照，其他都预测正确了。
 # 2. 模型改进想法：
 #     1. 对于权重和bias的设置是否有可以调节的空间；
 #     2. dropout的使用；
