@@ -67,8 +67,10 @@ def main():
     print dailies
     print dailies_acc
 
+
+    plt.figure(12, figsize=(15,15))
+
     # 绘制折线图，展示学习的积累情况，主要观察学习速率
-    plt.figure(12)
     plt.subplot(121)
     plt.plot(times,dailies_acc)
     ax = plt.gca()
@@ -79,6 +81,9 @@ def main():
     plt.ylim((0, 500))
     plt.grid(True)
 
+    for label in ax.xaxis.get_ticklabels():
+       label.set_rotation(30)
+
     # 绘制直方图，体现每日学习量
     plt.subplot(122)
     plt.bar(times,dailies)
@@ -88,6 +93,9 @@ def main():
     plt.ylabel(u'study_daily',fontproperties='SimHei')
     plt.xlabel(u'date',fontproperties='SimHei')
     plt.grid(True)
+
+    for label in ax.xaxis.get_ticklabels():
+       label.set_rotation(30)
 
     # 如果保存的话就不能show，否则会导致保存的是一片空白，应该可以解决吧，不过对我没影响，直接注释
     #plt.show()
