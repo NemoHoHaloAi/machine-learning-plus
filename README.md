@@ -58,6 +58,8 @@
     2018/10/9,毕业项目-30,毕业项目-30
     2018/10/10,毕业项目-30,毕业项目-30
     2018/10/11,毕业项目-30,毕业项目-60
+    2018/10/12,毕业项目-60,毕业项目-70
+    2018/10/13,毕业项目-70,毕业项目-80
     >>>>>>>>>>>END<<<<<<<<<<<<](https://github.com/NemoHoHaloAi/machine-learning-plus/blob/master/study_daily.png)
 
 ## final learn plan
